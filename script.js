@@ -50,21 +50,28 @@ decimal.addEventListener('click', (e) => {
 });
 
 function add(a, b) {
-  display.textContent = (a + b).toFixed(2);
+  display.textContent = a + b;
 }
 
 function subtract(a, b) {
-  display.textContent = (a - b).toFixed(2);
+  display.textContent = a - b;
 }
 
 function multiply(a, b) {
-  display.textContent = (a * b).toFixed(2);
+  let result = a * b;
+  display.textContent = overflowCheck(result);
 }
 
 function divide(a, b) {
   if (b !== 0) {
-  display.textContent = (a / b).toFixed(2);
+    let result = a / b;
+    display.textContent = overflowCheck(result);
   } else display.textContent = 'you mothafucka';
+}
+
+function overflowCheck(number) {
+  if (number.toString().length > 6) return number.toFixed(6);
+  else return number;
 }
 
 function operate(operator, a, b) {
