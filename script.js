@@ -23,7 +23,6 @@ buttons.forEach((number) => {
 
 operands.forEach((operand) => {
   operand.addEventListener('click', (e) => {
-    if (!displayValue) return;
     num1 = displayValue;
     operator = e.target.textContent;
     display.textContent = 0;
@@ -34,10 +33,13 @@ operands.forEach((operand) => {
 clear.addEventListener('click', () => {
   display.textContent = '0';
   displayValue = 0;
+  num1 = 0;
+  num2 = 0;
+  operator = '';
 });
 
 equals.addEventListener('click', () => {
-  if (!displayValue) return;
+  if (!operator) return;
   num2 = displayValue;
   operate(operator, num1, num2);
 });
@@ -75,6 +77,7 @@ function overflowCheck(number) {
 }
 
 function operate(operator, a, b) {
+  console.log(operator, a, b);
   switch (operator) {
     case '+':
       return add(a, b);
