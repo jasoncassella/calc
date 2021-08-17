@@ -46,10 +46,6 @@ equals.addEventListener('click', () => {
   operate(operator, num1, num2);
 });
 
-function getOperands(displayValue) {
-  return ['+', 9, 9];
-}
-
 function add(a, b) {
   display.textContent = a + b;
 }
