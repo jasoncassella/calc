@@ -2,12 +2,18 @@ let display = document.querySelector('#display');
 let buttons = document.querySelectorAll('.number');
 let operands = document.querySelectorAll('.operand');
 let clear = document.querySelector('#clear');
+let equals = document.querySelector('#equals');
+
 let displayValue = 0;
+let operator;
+let num1;
+let num2;
+let final;
 
 buttons.forEach((number) => {
   number.addEventListener('click', (e) => {
     if (displayValue) {
-      display.textContent = `${displayValue} ${e.target.textContent}`;
+      display.textContent = displayValue + e.target.textContent;
       displayValue = display.textContent;
     } else {
       display.textContent = e.target.textContent;
@@ -19,7 +25,9 @@ buttons.forEach((number) => {
 operands.forEach((operand) => {
   operand.addEventListener('click', (e) => {
     if (!displayValue) return;
-    display.textContent = `${displayValue} ${e.target.textContent}`;
+    num1 = parseInt(displayValue);
+    operator = e.target.textContent;
+    display.textContent = `${displayValue} ${e.target.textContent} `;
     displayValue = display.textContent;
   });
 });
@@ -29,20 +37,28 @@ clear.addEventListener('click', () => {
   displayValue = 0;
 });
 
+equals.addEventListener('click', () => {
+  console.log(displayValue);
+  console.log(num2);
+  operate(operator, num1, num2);
+});
+
 function add(a, b) {
-  return a + b;
+  display.textContent = a + b;
 }
 
 function subtract(a, b) {
-  return a - b;
+  display.textContent = a - b;
 }
 
 function multiply(a, b) {
-  return a * b;
+  display.textContent = a * b;
 }
 
-function divclasse(a, b) {
-  return a / b;
+function divide(a, b) {
+  if (b !== 0) {
+    display.textContent = a / b;
+  } else display.textContent = 'you mothafucka';
 }
 
 function operate(operator, a, b) {
@@ -54,10 +70,8 @@ function operate(operator, a, b) {
     case '*':
       return multiply(a, b);
     case '/':
-      return divclasse(a, b);
+      return divide(a, b);
     default:
       console.log('error');
   }
 }
-
-console.log(operate('+', 9, 10));
