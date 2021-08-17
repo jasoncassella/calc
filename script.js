@@ -50,11 +50,13 @@ decimal.addEventListener('click', (e) => {
 });
 
 function add(a, b) {
-  display.textContent = a + b;
+  let result = a + b;
+  display.textContent = overflowCheck(result);
 }
 
 function subtract(a, b) {
-  display.textContent = a - b;
+  let result = a - b;
+  display.textContent = overflowCheck(result);
 }
 
 function multiply(a, b) {
