@@ -9,27 +9,23 @@ let displayValue = 0;
 let operator;
 let num1;
 let num2;
-let final;
 
 buttons.forEach((number) => {
   number.addEventListener('click', (e) => {
     if (display.textContent !== '0') {
-      display.textContent += e.target.textContent; //append the number to the textContent of the display
-      displayValue = parseFloat(display.textContent); // update the displayValue
-      num2 = parseFloat(displayValue);
+      display.textContent += e.target.textContent;
     } else {
-      // if theres a 0 on the screen
-      display.textContent = e.target.textContent; // textContent = number
-      displayValue = parseFloat(display.textContent); //update the displayValue
+      display.textContent = e.target.textContent;
     }
+    displayValue = parseFloat(display.textContent);
   });
 });
 
 operands.forEach((operand) => {
   operand.addEventListener('click', (e) => {
-    if (!displayValue) return; // if theres a 0 on the screen do nothing
-    num1 = displayValue; // once you hit +,-,*, or /, the number before will be num1
-    operator = e.target.textContent; // operator = the operator button you hit
+    if (!displayValue) return;
+    num1 = displayValue;
+    operator = e.target.textContent;
     display.textContent = 0;
     displayValue = 0;
   });
@@ -41,13 +37,14 @@ clear.addEventListener('click', () => {
 });
 
 equals.addEventListener('click', () => {
-  if (!displayValue) return
+  if (!displayValue) return;
   num2 = displayValue;
   operate(operator, num1, num2);
 });
 
 decimal.addEventListener('click', (e) => {
-  display.textContent += e.target.textContent; //append the decimal to the textContent of the display
+  if (display.textContent.includes('.')) return;
+  display.textContent += e.target.textContent;
 });
 
 function add(a, b) {
