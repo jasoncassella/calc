@@ -41,6 +41,7 @@ clear.addEventListener('click', () => {
 });
 
 equals.addEventListener('click', () => {
+  if (!displayValue) return
   num2 = displayValue;
   operate(operator, num1, num2);
 });
