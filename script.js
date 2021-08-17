@@ -50,20 +50,20 @@ decimal.addEventListener('click', (e) => {
 });
 
 function add(a, b) {
-  display.textContent = a + b;
+  display.textContent = (a + b).toFixed(2);
 }
 
 function subtract(a, b) {
-  display.textContent = a - b;
+  display.textContent = (a - b).toFixed(2);
 }
 
 function multiply(a, b) {
-  display.textContent = a * b;
+  display.textContent = (a * b).toFixed(2);
 }
 
 function divide(a, b) {
   if (b !== 0) {
-    display.textContent = a / b;
+  display.textContent = (a / b).toFixed(2);
   } else display.textContent = 'you mothafucka';
 }
 
