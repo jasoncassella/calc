@@ -15,5 +15,5 @@ button {
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-	box-shadow: rgba(0, 0, 0, 0.08) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 3px 8px;
 }
