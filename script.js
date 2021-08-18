@@ -4,6 +4,8 @@ let operators = document.querySelectorAll('.operator');
 let clear = document.querySelector('#clear');
 let equals = document.querySelector('#equals');
 let decimal = document.querySelector('#decimal');
+let allClear = document.querySelector('#allClear')
+let negate = document.querySelector('#negate');
 
 let displayValue = 0;
 let myOperator;
@@ -38,11 +40,23 @@ clear.addEventListener('click', () => {
   myOperator = '';
 });
 
+allClear.addEventListener('click', () => {
+  display.textContent = '0';
+  displayValue = 0;
+  num1 = 0;
+  num2 = 0;
+  myOperator = '';
+})
+
 equals.addEventListener('click', (e) => {
   if (!myOperator) return;
   num2 = displayValue;
   operate(myOperator, num1, num2);
 });
+
+negate.addEventListener('click', (e) => {
+  // do something
+})
 
 decimal.addEventListener('click', (e) => {
   if (display.textContent.includes('.')) return;
