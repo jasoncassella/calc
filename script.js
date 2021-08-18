@@ -1,16 +1,16 @@
 let display = document.querySelector('#display');
-let buttons = document.querySelectorAll('.number');
-let operands = document.querySelectorAll('.operand');
+let numbers = document.querySelectorAll('.number');
+let operators = document.querySelectorAll('.operator');
 let clear = document.querySelector('#clear');
 let equals = document.querySelector('#equals');
 let decimal = document.querySelector('#decimal');
 
 let displayValue = 0;
-let operator;
+let myOperator;
 let num1;
 let num2;
 
-buttons.forEach((number) => {
+numbers.forEach((number) => {
   number.addEventListener('click', (e) => {
     if (display.textContent !== '0') {
       display.textContent += e.target.textContent;
@@ -21,11 +21,11 @@ buttons.forEach((number) => {
   });
 });
 
-operands.forEach((operand) => {
-  operand.addEventListener('click', (e) => {
+operators.forEach((operator) => {
+  operator.addEventListener('click', (e) => {
     num1 = displayValue;
-    operator = e.target.textContent;
-    display.textContent = 0;
+    myOperator = e.target.textContent;
+    display.textContent = '0';
     displayValue = 0;
   });
 });
@@ -35,13 +35,13 @@ clear.addEventListener('click', () => {
   displayValue = 0;
   num1 = 0;
   num2 = 0;
-  operator = '';
+  myOperator = '';
 });
 
-equals.addEventListener('click', () => {
-  if (!operator) return;
+equals.addEventListener('click', (e) => {
+  if (!myOperator) return;
   num2 = displayValue;
-  operate(operator, num1, num2);
+  operate(myOperator, num1, num2);
 });
 
 decimal.addEventListener('click', (e) => {
@@ -76,18 +76,15 @@ function overflowCheck(number) {
   else return number;
 }
 
-function operate(operator, a, b) {
-  console.log(operator, a, b);
-  switch (operator) {
+function operate(myOperator, a, b) {
+  switch (myOperator) {
     case '+':
       return add(a, b);
     case '-':
       return subtract(a, b);
-    case '*':
+    case '×':
       return multiply(a, b);
-    case '/':
+    case '÷':
       return divide(a, b);
-    default:
-      console.log('error');
   }
 }

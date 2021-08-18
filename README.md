@@ -1,4 +1,4 @@
-# Calculator
+# calculator
 
 im makin a calculator
 
