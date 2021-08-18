@@ -48,13 +48,13 @@ allClear.addEventListener('click', () => {
   myOperator = '';
 });
 
-equals.addEventListener('click', (e) => {
+equals.addEventListener('click', () => {
   if (!myOperator) return;
   num2 = displayValue;
   operate(myOperator, num1, num2);
 });
 
-negate.addEventListener('click', (e) => {
+negate.addEventListener('click', () => {
   if (displayValue > 0) {
     displayValue = 0 - displayValue;
     display.textContent = `${displayValue}`;
