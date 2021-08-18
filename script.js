@@ -57,11 +57,9 @@ equals.addEventListener('click', (e) => {
 negate.addEventListener('click', (e) => {
   if (displayValue > 0) {
     displayValue = 0 - displayValue;
-    console.log(displayValue);
     display.textContent = `${displayValue}`;
   } else if (displayValue < 0) {
     displayValue = Math.abs(displayValue);
-    console.log(displayValue);
     display.textContent = `${displayValue}`;
   }
 });
