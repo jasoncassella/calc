@@ -4,7 +4,7 @@ let operators = document.querySelectorAll('.operator');
 let clear = document.querySelector('#clear');
 let equals = document.querySelector('#equals');
 let decimal = document.querySelector('#decimal');
-let allClear = document.querySelector('#allClear')
+let allClear = document.querySelector('#allClear');
 let negate = document.querySelector('#negate');
 
 let displayValue = 0;
@@ -46,7 +46,7 @@ allClear.addEventListener('click', () => {
   num1 = 0;
   num2 = 0;
   myOperator = '';
-})
+});
 
 equals.addEventListener('click', (e) => {
   if (!myOperator) return;
@@ -55,8 +55,16 @@ equals.addEventListener('click', (e) => {
 });
 
 negate.addEventListener('click', (e) => {
-  // do something
-})
+  if (displayValue > 0) {
+    displayValue = 0 - displayValue;
+    console.log(displayValue);
+    display.textContent = `${displayValue}`;
+  } else if (displayValue < 0) {
+    displayValue = Math.abs(displayValue);
+    console.log(displayValue);
+    display.textContent = `${displayValue}`;
+  }
+});
 
 decimal.addEventListener('click', (e) => {
   if (display.textContent.includes('.')) return;
@@ -66,22 +74,26 @@ decimal.addEventListener('click', (e) => {
 function add(a, b) {
   let result = a + b;
   display.textContent = overflowCheck(result);
+  displayValue = parseFloat(display.textContent);
 }
 
 function subtract(a, b) {
   let result = a - b;
   display.textContent = overflowCheck(result);
+  displayValue = parseFloat(display.textContent);
 }
 
 function multiply(a, b) {
   let result = a * b;
   display.textContent = overflowCheck(result);
+  displayValue = parseFloat(display.textContent);
 }
 
 function divide(a, b) {
   if (b !== 0) {
     let result = a / b;
     display.textContent = overflowCheck(result);
+    displayValue = parseFloat(display.textContent);
   } else display.textContent = 'you mothafucka';
 }
 
