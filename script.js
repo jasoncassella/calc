@@ -12,103 +12,103 @@ let myOperator;
 let num1;
 let num2;
 
-numbers.forEach((number) => {
-  number.addEventListener('click', (e) => {
-    if (display.textContent !== '0') {
-      display.textContent += e.target.textContent;
-    } else {
-      display.textContent = e.target.textContent;
-    }
-    displayValue = parseFloat(display.textContent);
-  });
+numbers.forEach(number => {
+	number.addEventListener('click', e => {
+		if (display.textContent !== '0') {
+			display.textContent += e.target.textContent;
+		} else {
+			display.textContent = e.target.textContent;
+		}
+		displayValue = parseFloat(display.textContent);
+	});
 });
 
-operators.forEach((operator) => {
-  operator.addEventListener('click', (e) => {
-    num1 = displayValue;
-    myOperator = e.target.textContent;
-    display.textContent = '0';
-    displayValue = 0;
-  });
+operators.forEach(operator => {
+	operator.addEventListener('click', e => {
+		num1 = displayValue;
+		myOperator = e.target.textContent;
+		display.textContent = '0';
+		displayValue = 0;
+	});
 });
 
 clear.addEventListener('click', () => {
-  display.textContent = '0';
-  displayValue = 0;
-  num1 = 0;
-  num2 = 0;
-  myOperator = '';
+	display.textContent = '0';
+	displayValue = 0;
+	num1 = 0;
+	num2 = 0;
+	myOperator = '';
 });
 
 allClear.addEventListener('click', () => {
-  display.textContent = '0';
-  displayValue = 0;
-  num1 = 0;
-  num2 = 0;
-  myOperator = '';
+	display.textContent = '0';
+	displayValue = 0;
+	num1 = 0;
+	num2 = 0;
+	myOperator = '';
 });
 
 equals.addEventListener('click', () => {
-  if (!myOperator) return;
-  num2 = displayValue;
-  operate(myOperator, num1, num2);
+	if (!myOperator) return;
+	num2 = displayValue;
+	operate(myOperator, num1, num2);
 });
 
 negate.addEventListener('click', () => {
-  if (displayValue > 0) {
-    displayValue = 0 - displayValue;
-    display.textContent = `${displayValue}`;
-  } else if (displayValue < 0) {
-    displayValue = Math.abs(displayValue);
-    display.textContent = `${displayValue}`;
-  }
+	if (displayValue > 0) {
+		displayValue = 0 - displayValue;
+		display.textContent = `${displayValue}`;
+	} else if (displayValue < 0) {
+		displayValue = Math.abs(displayValue);
+		display.textContent = `${displayValue}`;
+	}
 });
 
-decimal.addEventListener('click', (e) => {
-  if (display.textContent.includes('.')) return;
-  display.textContent += e.target.textContent;
+decimal.addEventListener('click', e => {
+	if (display.textContent.includes('.')) return;
+	display.textContent += e.target.textContent;
 });
 
 function add(a, b) {
-  let result = a + b;
-  display.textContent = overflowCheck(result);
-  displayValue = parseFloat(display.textContent);
+	let result = a + b;
+	display.textContent = overflowCheck(result);
+	displayValue = parseFloat(display.textContent);
 }
 
 function subtract(a, b) {
-  let result = a - b;
-  display.textContent = overflowCheck(result);
-  displayValue = parseFloat(display.textContent);
+	let result = a - b;
+	display.textContent = overflowCheck(result);
+	displayValue = parseFloat(display.textContent);
 }
 
 function multiply(a, b) {
-  let result = a * b;
-  display.textContent = overflowCheck(result);
-  displayValue = parseFloat(display.textContent);
+	let result = a * b;
+	display.textContent = overflowCheck(result);
+	displayValue = parseFloat(display.textContent);
 }
 
 function divide(a, b) {
-  if (b !== 0) {
-    let result = a / b;
-    display.textContent = overflowCheck(result);
-    displayValue = parseFloat(display.textContent);
-  } else display.textContent = 'you mothafucka';
+	if (b !== 0) {
+		let result = a / b;
+		display.textContent = overflowCheck(result);
+		displayValue = parseFloat(display.textContent);
+	} else display.textContent = 'you mothafucka';
 }
 
 function overflowCheck(number) {
-  if (number.toString().length > 6) return number.toFixed(6);
-  else return number;
+	if (number.toString().length > 6) return number.toFixed(6);
+	else return number;
 }
 
 function operate(myOperator, a, b) {
-  switch (myOperator) {
-    case '+':
-      return add(a, b);
-    case '-':
-      return subtract(a, b);
-    case '×':
-      return multiply(a, b);
-    case '÷':
-      return divide(a, b);
-  }
+	switch (myOperator) {
+		case '+':
+			return add(a, b);
+		case '-':
+			return subtract(a, b);
+		case '×':
+			return multiply(a, b);
+		case '÷':
+			return divide(a, b);
+	}
 }
