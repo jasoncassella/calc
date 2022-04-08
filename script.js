@@ -1,18 +1,63 @@
-let display = document.querySelector('#display');
-let numbers = document.querySelectorAll('.number');
-let operators = document.querySelectorAll('.operator');
-let clear = document.querySelector('#clear');
-let equals = document.querySelector('#equals');
-let decimal = document.querySelector('#decimal');
-let allClear = document.querySelector('#allClear');
-let negate = document.querySelector('#negate');
+const calculator = {
+	displayText: '0',
+	displayValue: 0,
+	num1: undefined,
+	num2: undefined,
+	display: document.querySelector('#display'),
+	numbers: document.querySelectorAll('.number'),
+	operators: document.querySelectorAll('.operator'),
+	clear: document.querySelector('#clear'),
+	equals: document.querySelector('#equals'),
+	decimal: document.querySelector('#decimal'),
+	allClear: document.querySelector('#allClear'),
+	negate: document.querySelector('#negate'),
 
-let displayValue = 0;
-let myOperator;
-let num1;
-let num2;
+	operate(myOperator, a, b) {
+		switch (myOperator) {
+			case '+':
+				return this.add(a, b);
+			case '-':
+				return this.subtract(a, b);
+			case '×':
+				return this.multiply(a, b);
+			case '÷':
+				return this.divide(a, b);
+		}
+	},
 
-numbers.forEach(number => {
+	add(a, b) {
+		let result = a + b;
+		display.textContent = this.overflowCheck(result);
+		displayValue = parseFloat(display.textContent);
+	},
+
+	subtract(a, b) {
+		let result = a - b;
+		display.textContent = this.overflowCheck(result);
+		displayValue = parseFloat(display.textContent);
+	},
+
+	multiply(a, b) {
+		let result = a * b;
+		display.textContent = this.overflowCheck(result);
+		displayValue = parseFloat(display.textContent);
+	},
+
+	divide(a, b) {
+		if (b !== 0) {
+			let result = a / b;
+			display.textContent = this.overflowCheck(result);
+			displayValue = parseFloat(display.textContent);
+		} else display.textContent = 'you mothafucka';
+	},
+
+	overflowCheck(number) {
+		if (number.toString().length > 6) return number.toFixed(6);
+		else return number;
+	},
+};
+
+calculator.numbers.forEach(number => {
 	number.addEventListener('click', e => {
 		if (display.textContent !== '0') {
 			display.textContent += e.target.textContent;
@@ -23,7 +68,7 @@ numbers.forEach(number => {
 	});
 });
 
-operators.forEach(operator => {
+calculator.operators.forEach(operator => {
 	operator.addEventListener('click', e => {
 		num1 = displayValue;
 		myOperator = e.target.textContent;
@@ -32,7 +77,7 @@ operators.forEach(operator => {
 	});
 });
 
-clear.addEventListener('click', () => {
+calculator.clear.addEventListener('click', () => {
 	display.textContent = '0';
 	displayValue = 0;
 	num1 = 0;
@@ -40,7 +85,7 @@ clear.addEventListener('click', () => {
 	myOperator = '';
 });
 
-allClear.addEventListener('click', () => {
+calculator.allClear.addEventListener('click', () => {
 	display.textContent = '0';
 	displayValue = 0;
 	num1 = 0;
@@ -48,13 +93,13 @@ allClear.addEventListener('click', () => {
 	myOperator = '';
 });
 
-equals.addEventListener('click', () => {
+calculator.equals.addEventListener('click', () => {
 	if (!myOperator) return;
 	num2 = displayValue;
-	operate(myOperator, num1, num2);
+	calculator.operate(myOperator, num1, num2);
 });
 
-negate.addEventListener('click', () => {
+calculator.negate.addEventListener('click', () => {
 	if (displayValue > 0) {
 		displayValue = 0 - displayValue;
 		display.textContent = `${displayValue}`;
@@ -64,51 +109,7 @@ negate.addEventListener('click', () => {
 	}
 });
 
-decimal.addEventListener('click', e => {
+calculator.decimal.addEventListener('click', e => {
 	if (display.textContent.includes('.')) return;
 	display.textContent += e.target.textContent;
 });
-
-function add(a, b) {
-	let result = a + b;
-	display.textContent = overflowCheck(result);
-	displayValue = parseFloat(display.textContent);
-}
-
-function subtract(a, b) {
-	let result = a - b;
-	display.textContent = overflowCheck(result);
-	displayValue = parseFloat(display.textContent);
-}
-
-function multiply(a, b) {
-	let result = a * b;
-	display.textContent = overflowCheck(result);
-	displayValue = parseFloat(display.textContent);
-}
-
-function divide(a, b) {
-	if (b !== 0) {
-		let result = a / b;
-		display.textContent = overflowCheck(result);
-		displayValue = parseFloat(display.textContent);
-	} else display.textContent = 'you mothafucka';
-}
-
-function overflowCheck(number) {
-	if (number.toString().length > 6) return number.toFixed(6);
-	else return number;
-}
-
-function operate(myOperator, a, b) {
-	switch (myOperator) {
-		case '+':
-			return add(a, b);
-		case '-':
-			return subtract(a, b);
-		case '×':
-			return multiply(a, b);
-		case '÷':
-			return divide(a, b);
-	}
-}
